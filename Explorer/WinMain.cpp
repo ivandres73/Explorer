@@ -72,7 +72,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 		case WM_CREATE:
 		{
-			createTreeView(0, 0, 200, 200, hwnd);
+			createTreeView(0, 0, 400, 200, hwnd);
 		}
 	}
 	return DefWindowProc(hwnd, uMsg, wParam, lParam);
