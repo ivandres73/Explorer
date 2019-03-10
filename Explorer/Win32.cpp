@@ -27,3 +27,13 @@ HWND Win32::createTreeView(int x, int y, int height, int width, HWND hWnd)
 		(HMENU)IDM_TREE_VIEW, hInst, nullptr);*/
 	return 0;
 }
+
+int Win32::getNumberOfDrives(char* s)
+{
+	int i = 0;
+	while (s[i] != '\0' && s[i + 1] != '\0')
+	{
+		i++;
+	}
+	return i;
+}

@@ -5,6 +5,7 @@
 #include <Windows.h>
 #include "Win32.h"
 #include <CommCtrl.h>
+#include <iostream>
 
 HINSTANCE hInst;
 HWND g_treeview;//handler for treeview
@@ -110,6 +111,27 @@ HWND createMainWindow(WNDCLASS wc, HINSTANCE* hInstance)
 
 int loadTreeview()
 {
+	TV_INSERTSTRUCT tv_insert;
+	/*tv_insert.hParent = NULL;
+	tv_insert.hInsertAfter = TVI_ROOT;
+	tv_insert.item.mask = TVIF_TEXT | TVIF_IMAGE | TVIF_SELECTEDIMAGE | TVIF_PARAM;
+	tv_insert.item.pszText = (LPWSTR)"Desktop";
+	tv_insert.item.lParam = (LPARAM)("Desktop");
+	HTREEITEM hDesktop = TreeView_InsertItem(g_treeview, &tv_insert);*/
+
+	tv_insert.hParent = NULL;
+	tv_insert.hInsertAfter = TVI_ROOT;
+	tv_insert.item.mask = TVIF_TEXT | TVIF_IMAGE | TVIF_SELECTEDIMAGE | TVIF_PARAM;
+	tv_insert.item.pszText = (LPWSTR)L"My Computer";
+	tv_insert.item.lParam = (LPARAM)("MyComputer");
+	HTREEITEM hMyComputer = TreeView_InsertItem(g_treeview, &tv_insert);
+
+	DWORD gld = GetLogicalDrives();
+	for (int i = 0; i < 1; i++)
+	{
+		std::cout << "hola" << gld;
+	}
+
 	char buffer[100];
 	GetLogicalDriveStringsW(100, (LPWSTR)buffer);
 	MessageBox(0, (LPWSTR)buffer, (LPWSTR)buffer, 0);
