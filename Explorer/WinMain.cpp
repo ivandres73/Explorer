@@ -7,9 +7,11 @@
 #include <CommCtrl.h>
 
 HINSTANCE hInst;
+HWND g_treeview;//handler for treeview
 
 HWND createMainWindow(WNDCLASS wc, HINSTANCE* hInstance);
 int createTreeview(int x, int y, int height, int width, HWND hWnd);
+int loadTreeview();
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow)
@@ -30,7 +32,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
 		if (msg.message == WM_KEYDOWN)
-			MessageBoxEx(0, L"event", L"you pressed a key", 0, 0);
+			loadTreeview();
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
@@ -39,6 +41,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
 
 int createTreeView(int x, int y, int height, int width, HWND hWnd)
 {
+	g_treeview =
 	CreateWindowEx(0, WC_TREEVIEW, L"TREE VIEW", WS_CHILD | WS_VISIBLE | WS_BORDER | WS_SIZEBOX | WS_VSCROLL | WS_TABSTOP
 		| TVS_HASLINES | TVS_LINESATROOT | TVS_HASBUTTONS | TVS_SHOWSELALWAYS, x, y, width, height, hWnd,
 		NULL,/*(HMENU)ID_TREEVIEW*/ hInst, NULL);
@@ -105,3 +108,10 @@ HWND createMainWindow(WNDCLASS wc, HINSTANCE* hInstance)
 	);
 }
 
+int loadTreeview()
+{
+	char buffer[100];
+	GetLogicalDriveStringsW(100, (LPWSTR)buffer);
+	MessageBox(0, (LPWSTR)buffer, (LPWSTR)buffer, 0);
+	return 0;
+}
